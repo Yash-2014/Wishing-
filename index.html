@@ -1,17 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Special Festival Wishes</title>
+    <title>Merry Christmas Wishes</title>
     <style>
         /* --- CORE CSS --- */
         body {
             margin: 0;
             padding: 0;
-            background: radial-gradient(circle, #2e0000, #000000);
+            background: radial-gradient(circle, #002e00, #000000); /* Dark Green/Black for Christmas */
             font-family: 'Arial', sans-serif;
-            color: #ffcc00;
+            color: #fff;
             text-align: center;
             height: 100vh;
             overflow: hidden;
@@ -29,7 +30,7 @@
             pointer-events: none;
         }
 
-        /* --- FLOWER ANIMATION (BACKGROUND) --- */
+        /* --- SNOW/ICON ANIMATION (BACKGROUND) --- */
         .flower {
             position: absolute;
             top: -10%;
@@ -37,7 +38,7 @@
             font-size: 20px;
             animation: fall linear forwards;
             z-index: 1;
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
         @keyframes fall {
@@ -86,13 +87,14 @@
             position: relative;
         }
 
-        #page1 .main-gif {
+        /* UPDATED: Style for Video instead of Img */
+        #page1 .main-media {
             width: 65%;
             height: 90%; 
-            object-fit: contain;
-            border: 3px solid gold;
+            object-fit: contain; /* Ensures video fits */
+            border: 3px solid #ff0000; /* Red Border */
             border-radius: 15px;
-            box-shadow: 0 0 20px gold;
+            box-shadow: 0 0 20px #00ff00; /* Green Glow */
             background: black;
             z-index: 20;
         }
@@ -109,12 +111,12 @@
 
         .gorgeous-box {
             background: rgba(100, 0, 0, 0.6);
-            border: 2px double #ffd700;
+            border: 2px double #00ff00;
             border-radius: 20px;
             padding: 15px;
             width: 100%;
             backdrop-filter: blur(5px);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
             animation: glow 2s infinite alternate;
         }
 
@@ -148,8 +150,8 @@
             background: rgba(50, 0, 0, 0.9);
             padding: 20px;
             border-radius: 15px;
-            border: 2px solid gold;
-            box-shadow: 0 0 30px rgba(255, 69, 0, 0.5);
+            border: 2px solid #00ff00;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -157,7 +159,7 @@
 
         /* --- BUTTONS --- */
         .btn-next {
-            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            background: linear-gradient(to right, #ff0000, #cc0000);
             color: white;
             border: 2px solid white;
             padding: 10px 30px;
@@ -169,11 +171,10 @@
             z-index: 50;
         }
 
-        /* Style for the Change Image Button */
         .btn-change-img {
-            background: #ff8c00; /* Orange */
+            background: #25D366; /* Green */
             color: white;
-            border: 1px solid gold;
+            border: 1px solid white;
             padding: 8px 20px;
             border-radius: 20px;
             font-weight: bold;
@@ -188,11 +189,12 @@
             padding: 12px;
             width: 80%;
             border-radius: 25px;
-            border: 2px solid #25D366;
+            border: 2px solid #ff0000;
             text-align: center;
             font-size: 16px;
             margin: 10px 0;
             outline: none;
+            color: #000;
         }
 
         .wa-btn {
@@ -213,7 +215,7 @@
             animation: pulseBtn 2s infinite;
         }
 
-        @keyframes glow { from {box-shadow: 0 0 10px #ff0000;} to {box-shadow: 0 0 25px #ffd700;} }
+        @keyframes glow { from {box-shadow: 0 0 10px #ff0000;} to {box-shadow: 0 0 25px #00ff00;} }
         @keyframes pulseText { 0% {opacity: 0.6;} 50% {opacity: 1;} 100% {opacity: 0.6;} }
         @keyframes pulseBtn { 0% {transform: scale(1);} 50% {transform: scale(1.02);} 100% {transform: scale(1);} }
 
@@ -237,18 +239,25 @@
     <!-- ================= PAGE 1: GREETING SHOWCASE ================= -->
     <div id="page1" class="page">
         <div class="image-section">
-            <img src="images/vil.gif" class="main-gif" id="displayImage" alt="Festival Gif">
+            <!-- UPDATED: VIDEO TAG instead of IMG -->
+            <video src="images/vil.mp4" class="main-media" id="displayImage" autoplay loop muted playsinline></video>
         </div>
 
         <div class="quote-section">
             <div class="gorgeous-box">
-                <div class="wish-text">Happy Wishes<br><span id="senderNameDisplay" style="color: gold; font-size: 2rem;">From You</span></div>
+                <!-- UPDATED TEXT: Merry Christmas + From [Name] -->
+                <div class="wish-text">
+                    Merry Christmas<br>
+                    <span style="font-size: 1.2rem; color: #ccc;">From</span><br>
+                    <span id="senderNameDisplay" style="color: gold; font-size: 2rem;">You</span>
+                </div>
                 
+                <!-- UPDATED QUOTE: Christmas -->
                 <p class="quote-text">
-                    "Deepawali ka ye pyara tyohar,<br>
-                    Jeevan mein laye khushiyan apaar,<br>
-                    Mata Laxmi viraje aapke dwar,<br>
-                    Shubh kamna hamari karein sweekar!"
+                    "May this Christmas bring you joy,<br>
+                    Happiness and love.<br>
+                    Wishing you and your family<br>
+                    A very Merry Christmas!"
                 </p>
 
                 <p class="create-msg">👇 अपना नाम लिखने के लिए नीचे क्लिक करें 👇</p>
@@ -260,13 +269,13 @@
     <!-- ================= PAGE 2: CREATION VIEW ================= -->
     <div id="page2" class="page">
         <div class="container-box">
-            <h2 style="color: gold; margin-top:0; margin-bottom: 10px;">Create Your Wish 🪔</h2>
+            <h2 style="color: gold; margin-top:0; margin-bottom: 10px;">Create Your Wish 🎄</h2>
             
-            <!-- Preview Image -->
-            <img src="images/vil.mp4" id="previewImage" style="width: 150px; height: 150px; object-fit: contain; border-radius: 10px; border: 2px solid white; background: black;">
+            <!-- Preview VIDEO (Updated path) -->
+            <video src="images/vil.mp4" id="previewImage" autoplay loop muted playsinline style="width: 150px; height: 150px; object-fit: contain; border-radius: 10px; border: 2px solid white; background: black;"></video>
 
-            <!-- ADDED: Change Image Button -->
-            <button class="btn-change-img" onclick="changeImage()">Change Image 🔄</button>
+            <!-- Change Image Button -->
+            <button class="btn-change-img" onclick="changeImage()">Change Video 🔄</button>
 
             <!-- Input Area -->
             <p style="color: white; margin-bottom: 5px; margin-top: 15px;">Enter Your Name:</p>
@@ -296,14 +305,14 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // CONFIG - EXTENDED IMAGE LIST (vil.mp4 to vil18.mp4)
+        // CONFIG - EXTENDED MP4 LIST (vil.mp4 to vil18.mp4)
         const images = [
             'images/vil.mp4', 
-            'images/vil1.gif', 'images/vil2.gif', 'images/vil3.gif', 'images/vil4.gif',
-            'images/vil5.gif', 'images/vil6.gif', 'images/vil7.gif', 'images/vil8.gif',
-            'images/vil9.gif', 'images/vil10.gif', 'images/vil11.gif', 'images/vil12.gif',
-            'images/vil13.gif', 'images/vil14.gif', 'images/vil15.gif', 'images/vil16.gif',
-            'images/vil17.gif', 'images/vil18.gif'
+            'images/vil1.mp4', 'images/vil2.mp4', 'images/vil3.mp4', 'images/vil4.mp4',
+            'images/vil5.mp4', 'images/vil6.mp4', 'images/vil7.mp4', 'images/vil8.mp4',
+            'images/vil9.mp4', 'images/vil10.mp4', 'images/vil11.mp4', 'images/vil12.mp4',
+            'images/vil13.mp4', 'images/vil14.mp4', 'images/vil15.mp4', 'images/vil16.mp4',
+            'images/vil17.mp4', 'images/vil18.mp4'
         ];
         
         let currentIndex = 0; 
@@ -314,13 +323,13 @@
             const senderName = urlParams.get('n');
             const imgIndex = urlParams.get('i'); 
 
-            // Load selected image from URL if present
+            // Load selected video from URL if present
             if (imgIndex !== null && !isNaN(imgIndex)) {
                 currentIndex = parseInt(imgIndex);
                 if(currentIndex >= images.length) currentIndex = 0;
             }
 
-            // Update both images
+            // Update both video elements
             document.getElementById('displayImage').src = images[currentIndex];
             document.getElementById('previewImage').src = images[currentIndex];
 
@@ -337,7 +346,7 @@
             
             // Animations
             startHeavyFireworks();
-            createFlowers();
+            createChristmasIcons();
         };
 
         // --- NAVIGATION ---
@@ -346,14 +355,14 @@
             document.getElementById('page2').classList.add('active');
         }
 
-        // --- CHANGE IMAGE FUNCTION (PAGE 2) ---
+        // --- CHANGE VIDEO FUNCTION ---
         function changeImage() {
             currentIndex++;
             if (currentIndex >= images.length) currentIndex = 0;
             
-            // Update the preview image on Page 2
+            // Update the preview video on Page 2
             document.getElementById('previewImage').src = images[currentIndex];
-            // Also update Page 1 image so it's ready when shared
+            // Also update Page 1 video so it's ready when shared
             document.getElementById('displayImage').src = images[currentIndex];
         }
 
@@ -364,13 +373,13 @@
 
             const baseUrl = window.location.href.split('?')[0];
             
-            // Include 'i' parameter so the receiver sees the SAME image
             const newUrl = baseUrl + "?n=" + encodeURIComponent(name) + "&i=" + currentIndex;
 
             document.getElementById('manualShare').style.display = 'block';
             document.getElementById('generatedUrl').value = newUrl;
 
-            const msg = `✨ *Happy Diwali Surprise* ✨\n\n${name} has sent you a magical greeting! 🎁\nClick the blue link to see magic 👇\n\n${newUrl}`;
+            // Updated Christmas Message
+            const msg = `🎄 *Merry Christmas Surprise* 🎄\n\n${name} has sent you a magical greeting! 🎅\nClick the blue link below 👇\n\n${newUrl}`;
             window.location.href = "whatsapp://send?text=" + encodeURIComponent(msg);
         }
 
@@ -409,7 +418,8 @@
                 this.draw();
             }
             function createExplosion(x, y) {
-                const colors = ['#ff0000', '#ffd700', '#00ff00', '#00ffff', '#ff00ff', '#ffffff'];
+                // Christmas Colors: Red, Green, Gold, White
+                const colors = ['#ff0000', '#00ff00', '#ffd700', '#ffffff'];
                 for (let i = 0; i < 100; i++) particles.push(new Particle(x, y, colors[Math.floor(Math.random() * colors.length)]));
             }
             function animate() {
@@ -421,9 +431,9 @@
             animate();
         }
 
-        // --- FLOWERS ---
-        function createFlowers() {
-            const symbols = ['🌸', '🌺', '🌹', '🌻', '🪔'];
+        // --- CHRISTMAS ICONS ANIMATION ---
+        function createChristmasIcons() {
+            const symbols = ['❄️', '🎄', '🎅', '🎁', '⛄', '🔔'];
             setInterval(() => {
                 const flower = document.createElement('div');
                 flower.classList.add('flower');
