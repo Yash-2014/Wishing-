@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -237,7 +237,8 @@
     <!-- ================= PAGE 1: GREETING SHOWCASE ================= -->
     <div id="page1" class="page">
         <div class="image-section">
-            <img src="vil.gif" class="main-gif" id="displayImage" alt="Festival Gif">
+            <!-- UPDATED PATH: images/vil.gif -->
+            <img src="images/vil.gif" class="main-gif" id="displayImage" alt="Festival Gif">
         </div>
 
         <div class="quote-section">
@@ -262,8 +263,8 @@
         <div class="container-box">
             <h2 style="color: gold; margin-top:0; margin-bottom: 10px;">Create Your Wish 🪔</h2>
             
-            <!-- Preview Image -->
-            <img src="vil.gif" id="previewImage" style="width: 150px; height: 150px; object-fit: contain; border-radius: 10px; border: 2px solid white; background: black;">
+            <!-- Preview Image (UPDATED PATH: images/vil.gif) -->
+            <img src="images/vil.gif" id="previewImage" style="width: 150px; height: 150px; object-fit: contain; border-radius: 10px; border: 2px solid white; background: black;">
 
             <!-- ADDED: Change Image Button -->
             <button class="btn-change-img" onclick="changeImage()">Change Image 🔄</button>
@@ -284,7 +285,7 @@
                 <button onclick="copyLink()" style="margin-top:5px; cursor: pointer;">Copy Link</button>
             </div>
 
-            <!-- REMOVED: Blog Link <a> tag was here -->
+            <!-- Blog Link is REMOVED as requested -->
         </div>
     </div>
 
@@ -298,8 +299,14 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // CONFIG
-        const images = ['vil.gif', 'vil1.gif', 'vil2.gif', 'vil3.gif', 'vil4.gif'];
+        // CONFIG - UPDATED PATHS
+        const images = [
+            'images/vil.gif', 
+            'images/vil1.gif', 
+            'images/vil2.gif', 
+            'images/vil3.gif', 
+            'images/vil4.gif'
+        ];
         let currentIndex = 0; 
 
         // --- ON LOAD ---
@@ -437,4 +444,4 @@
         });
     </script>
 </body>
-</html>                
+</html>           
