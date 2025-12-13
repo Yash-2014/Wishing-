@@ -18,7 +18,7 @@
             position: relative;
         }
 
-        /* --- FIREWORKS (FOREGROUND) --- */
+        /* --- FIREWORKS (FOREGROUND - ON TOP) --- */
         canvas {
             position: fixed;
             top: 0;
@@ -169,8 +169,9 @@
             z-index: 50;
         }
 
+        /* Style for the Change Image Button */
         .btn-change-img {
-            background: #ff8c00;
+            background: #ff8c00; /* Orange */
             color: white;
             border: 1px solid gold;
             padding: 8px 20px;
@@ -179,7 +180,9 @@
             cursor: pointer;
             margin: 10px 0;
             font-size: 14px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
+        .btn-change-img:active { transform: scale(0.95); }
 
         .input-field {
             padding: 12px;
@@ -260,13 +263,13 @@
             <h2 style="color: gold; margin-top:0; margin-bottom: 10px;">Create Your Wish 🪔</h2>
             
             <!-- Preview Image -->
-            <img id="previewImage" src="vil.gif" style="width: 150px; height: 150px; object-fit: contain; border-radius: 10px; border: 2px solid white; background: black;">
+            <img src="vil.gif" id="previewImage" style="width: 150px; height: 150px; object-fit: contain; border-radius: 10px; border: 2px solid white; background: black;">
 
-            <!-- NEW: Change Image Button -->
+            <!-- ADDED: Change Image Button -->
             <button class="btn-change-img" onclick="changeImage()">Change Image 🔄</button>
 
             <!-- Input Area -->
-            <p style="color: white; margin-bottom: 5px; margin-top: 5px;">Enter Your Name:</p>
+            <p style="color: white; margin-bottom: 5px; margin-top: 15px;">Enter Your Name:</p>
             <input type="text" id="nameInput" class="input-field" placeholder="आपका नाम यहाँ...">
             
             <!-- WhatsApp Share Button -->
@@ -280,6 +283,8 @@
                 <input type="text" id="generatedUrl" readonly>
                 <button onclick="copyLink()" style="margin-top:5px; cursor: pointer;">Copy Link</button>
             </div>
+
+            <!-- REMOVED: Blog Link <a> tag was here -->
         </div>
     </div>
 
@@ -295,23 +300,22 @@
     <script>
         // CONFIG
         const images = ['vil.gif', 'vil1.gif', 'vil2.gif', 'vil3.gif', 'vil4.gif'];
-        let currentIndex = 0; // Tracks which image is selected
+        let currentIndex = 0; 
 
         // --- ON LOAD ---
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const senderName = urlParams.get('n');
-            const imgIndex = urlParams.get('i'); // Get image index from URL
+            const imgIndex = urlParams.get('i'); 
 
-            // Set Image if param exists
+            // Load selected image from URL if present
             if (imgIndex !== null && !isNaN(imgIndex)) {
                 currentIndex = parseInt(imgIndex);
                 if(currentIndex >= images.length) currentIndex = 0;
             }
 
-            // Update Page 1 Image based on Link
+            // Update both images
             document.getElementById('displayImage').src = images[currentIndex];
-            // Update Page 2 Preview as well
             document.getElementById('previewImage').src = images[currentIndex];
 
             if (senderName) {
@@ -343,6 +347,8 @@
             
             // Update the preview image on Page 2
             document.getElementById('previewImage').src = images[currentIndex];
+            // Also update Page 1 image so it's ready when shared
+            document.getElementById('displayImage').src = images[currentIndex];
         }
 
         // --- SHARE LOGIC ---
@@ -352,7 +358,7 @@
 
             const baseUrl = window.location.href.split('?')[0];
             
-            // IMPORTANT: Include 'i' parameter for image index
+            // Include 'i' parameter so the receiver sees the SAME image
             const newUrl = baseUrl + "?n=" + encodeURIComponent(name) + "&i=" + currentIndex;
 
             document.getElementById('manualShare').style.display = 'block';
@@ -369,7 +375,7 @@
             alert("Link Copied!");
         }
 
-        // --- FIREWORKS (Move to Front) ---
+        // --- FIREWORKS (Front Layer) ---
         function startHeavyFireworks() {
             const canvas = document.getElementById("fireworksCanvas");
             const ctx = canvas.getContext("2d");
@@ -431,4 +437,4 @@
         });
     </script>
 </body>
-</html>
+</html>                
