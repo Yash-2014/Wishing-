@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -237,7 +237,6 @@
     <!-- ================= PAGE 1: GREETING SHOWCASE ================= -->
     <div id="page1" class="page">
         <div class="image-section">
-            <!-- UPDATED PATH: images/vil.gif -->
             <img src="images/vil.gif" class="main-gif" id="displayImage" alt="Festival Gif">
         </div>
 
@@ -263,7 +262,7 @@
         <div class="container-box">
             <h2 style="color: gold; margin-top:0; margin-bottom: 10px;">Create Your Wish 🪔</h2>
             
-            <!-- Preview Image (UPDATED PATH: images/vil.gif) -->
+            <!-- Preview Image -->
             <img src="images/vil.gif" id="previewImage" style="width: 150px; height: 150px; object-fit: contain; border-radius: 10px; border: 2px solid white; background: black;">
 
             <!-- ADDED: Change Image Button -->
@@ -284,8 +283,6 @@
                 <input type="text" id="generatedUrl" readonly>
                 <button onclick="copyLink()" style="margin-top:5px; cursor: pointer;">Copy Link</button>
             </div>
-
-            <!-- Blog Link is REMOVED as requested -->
         </div>
     </div>
 
@@ -299,14 +296,16 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // CONFIG - UPDATED PATHS
+        // CONFIG - EXTENDED IMAGE LIST (vil.gif to vil18.gif)
         const images = [
             'images/vil.gif', 
-            'images/vil1.gif', 
-            'images/vil2.gif', 
-            'images/vil3.gif', 
-            'images/vil4.gif'
+            'images/vil1.gif', 'images/vil2.gif', 'images/vil3.gif', 'images/vil4.gif',
+            'images/vil5.gif', 'images/vil6.gif', 'images/vil7.gif', 'images/vil8.gif',
+            'images/vil9.gif', 'images/vil10.gif', 'images/vil11.gif', 'images/vil12.gif',
+            'images/vil13.gif', 'images/vil14.gif', 'images/vil15.gif', 'images/vil16.gif',
+            'images/vil17.gif', 'images/vil18.gif'
         ];
+        
         let currentIndex = 0; 
 
         // --- ON LOAD ---
@@ -444,4 +443,4 @@
         });
     </script>
 </body>
-</html>           
+</html>
