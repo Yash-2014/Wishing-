@@ -1,310 +1,365 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Special Wishes For You</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Special Festival Wishes</title>
     <style>
         /* --- CORE CSS --- */
         body {
             margin: 0;
             padding: 0;
-            background: radial-gradient(circle, #2e0000, #000000);
+            background: radial-gradient(circle, #2e0000, #000000); /* Dark Red Theme */
             font-family: 'Arial', sans-serif;
             color: #ffcc00;
             text-align: center;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-x: hidden;
+            height: 100vh;
+            overflow: hidden; /* Hide scrollbars for full screen feel */
+            position: relative;
         }
 
-        /* Fireworks Canvas - UPDATED TO FRONT */
+        /* --- FIREWORKS (FOREGROUND) --- */
         canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 9999; /* Moved to Front */
-            pointer-events: none; /* Clicks will pass through to buttons */
+            z-index: 9999; /* On Top */
+            pointer-events: none; /* Allows clicking buttons through fireworks */
         }
 
-        /* Ad Container Style */
+        /* --- FLOWER ANIMATION (BACKGROUND) --- */
+        .flower {
+            position: absolute;
+            top: -10%;
+            color: #fff;
+            font-size: 20px;
+            animation: fall linear forwards;
+            z-index: 1; /* Behind content */
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        /* --- AD CONTAINERS --- */
         .ad-container {
-            margin: 10px auto;
-            text-align: center;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px;
-            border-radius: 5px;
+            position: fixed;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
         }
+        .ad-top { top: 0; }
+        .ad-bottom { bottom: 0; }
 
-        .container {
-            position: relative;
-            width: 92%;
-            max-width: 480px;
-            background: rgba(50, 0, 0, 0.8);
-            padding: 15px;
-            border-radius: 15px;
-            border: 3px solid #ffd700;
-            box-shadow: 0 0 25px rgba(255, 140, 0, 0.6);
-            backdrop-filter: blur(4px);
-            margin: 10px 0;
-            z-index: 10; /* Lower than canvas */
-        }
-
-        h1 {
-            font-size: 2rem;
-            margin: 5px 0;
-            color: gold;
-            text-shadow: 2px 2px 4px red;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        /* Greeting Text Animation */
-        #wishingText {
-            display: none;
-            margin-bottom: 10px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-shadow: 0 0 10px #ff0000, 0 0 20px gold;
-        }
-
-        .image-box {
+        /* --- PAGE MANAGEMENT --- */
+        .page {
             width: 100%;
-            height: 280px;
-            border: 2px dashed #ffcc00;
-            border-radius: 10px;
-            background: #000;
+            height: 100%;
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 60px; /* Space for Top Ad */
+            padding-bottom: 70px; /* Space for Bottom Ad */
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        /* Active page class */
+        .page.active { display: flex; }
+
+        /* --- PAGE 1: GREETING VIEW --- */
+        #page1 .image-section {
+            height: 55%;
+            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            position: relative;
+        }
+
+        #page1 .main-gif {
+            width: 65%;
+            max-height: 90%;
+            object-fit: contain;
+            border: 3px solid gold;
+            border-radius: 15px;
+            box-shadow: 0 0 20px gold;
+            background: black;
+            z-index: 20;
+        }
+
+        #page1 .quote-section {
+            height: 45%;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 10px;
+        }
+
+        .gorgeous-box {
+            background: rgba(100, 0, 0, 0.6); /* Semi-transparent Red */
+            border: 2px double #ffd700;
+            border-radius: 20px;
+            padding: 15px;
+            width: 100%;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            animation: glow 2s infinite alternate;
+        }
+
+        .wish-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px #000;
+            margin-bottom: 5px;
+        }
+
+        .quote-text {
+            font-size: 1rem;
+            color: #ffeb3b;
+            font-style: italic;
             margin-bottom: 10px;
         }
 
-        .image-box img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+        .create-msg {
+            font-size: 0.9rem;
+            color: #00ff00;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            animation: pulseText 1s infinite;
+        }
+
+        /* --- PAGE 2: CREATION VIEW --- */
+        .container-box {
+            width: 90%;
+            max-width: 450px;
+            background: rgba(50, 0, 0, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid gold;
+            box-shadow: 0 0 30px rgba(255, 69, 0, 0.5);
         }
 
         /* --- BUTTONS --- */
         .btn-next {
-            background: #ff4500;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
             color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 20px;
+            border: 2px solid white;
+            padding: 10px 30px;
+            font-size: 18px;
             font-weight: bold;
+            border-radius: 30px;
             cursor: pointer;
-            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 50;
         }
 
-        .input-area {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid gold;
-        }
+        .btn-next:active { transform: scale(0.95); }
 
-        input[type="text"] {
+        .input-field {
             padding: 12px;
             width: 80%;
-            border-radius: 30px;
+            border-radius: 25px;
             border: 2px solid #25D366;
             text-align: center;
             font-size: 16px;
-            outline: none;
             margin-bottom: 15px;
+            outline: none;
         }
 
-        /* WHATSAPP SHARE BUTTON STYLE */
         .wa-btn {
-            background: linear-gradient(45deg, #25D366, #128C7E);
+            background: #25D366;
             color: white;
             padding: 12px 20px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             border: 2px solid white;
             border-radius: 50px;
             cursor: pointer;
-            width: 90%;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            animation: pulse 2s infinite;
-        }
-
-        .wa-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .wa-icon {
-            width: 24px;
-            height: 24px;
-            fill: white;
+            margin-top: 10px;
+            animation: pulseBtn 2s infinite;
         }
 
         .blog-btn {
-            background: #007bff;
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
             display: inline-block;
             margin-top: 15px;
+            color: cyan;
+            text-decoration: underline;
             font-size: 14px;
         }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
+        /* Animations */
+        @keyframes glow { from {box-shadow: 0 0 10px #ff0000;} to {box-shadow: 0 0 25px #ffd700;} }
+        @keyframes pulseText { 0% {opacity: 0.6;} 50% {opacity: 1;} 100% {opacity: 0.6;} }
+        @keyframes pulseBtn { 0% {transform: scale(1);} 50% {transform: scale(1.02);} 100% {transform: scale(1);} }
 
-        /* Fallback Share Section */
-        #manualShare {
-            display: none;
-            margin-top: 15px;
-            background: #222;
-            padding: 10px;
-            border-radius: 5px;
-        }
+        /* Manual Share Fallback */
+        #manualShare { display: none; margin-top: 10px; }
+        #generatedUrl { width: 90%; background: #222; color: #fff; border: 1px solid #555; font-size: 10px; padding: 5px; }
     </style>
 </head>
 <body>
 
-    <!-- Fireworks Background (Now on Front) -->
+    <!-- 1. HEAVY FIREWORKS (FRONT LAYER) -->
     <canvas id="fireworksCanvas"></canvas>
 
-    <!-- ADSTERRA AD UNIT (TOP) -->
-    <div class="ad-container">
+    <!-- 2. ADS (FIXED) -->
+    <div class="ad-container ad-top">
+        <!-- Adsterra Top Code -->
         <script type="text/javascript">
-            atOptions = {
-                'key' : '5151d99dda1d9483bde7073716b4e6c7',
-                'format' : 'iframe',
-                'height' : 60,
-                'width' : 468,
-                'params' : {}
-            };
+            atOptions = { 'key' : '5151d99dda1d9483bde7073716b4e6c7', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
         </script>
         <script type="text/javascript" src="//www.highperformanceformat.com/5151d99dda1d9483bde7073716b4e6c7/invoke.js"></script>
     </div>
 
-    <div class="container">
-        <div style="font-size: 20px;">✨ 🎉 ✨</div>
-
-        <!-- Greeting Area -->
-        <div id="wishingText">
-            <span style="color: #ffd700;">Happy Wishes From</span><br>
-            <span id="displayName" style="color: #fff; font-size: 2rem;"></span>
-        </div>
-        
-        <h1 id="defaultHeader">Best Wishes For You</h1>
-
-        <!-- Image Area -->
-        <div class="image-box">
-            <img id="mainImage" src="vil.gif" alt="Festival Animation">
+    <!-- ================= PAGE 1: GREETING SHOWCASE ================= -->
+    <div id="page1" class="page">
+        <!-- Image Section (55% Height, 65% Width) -->
+        <div class="image-section">
+            <img src="vil.gif" class="main-gif" id="displayImage" alt="Festival Gif">
         </div>
 
-        <button class="btn-next" onclick="changeImage()">Next Image ⏩</button>
+        <!-- Quote Section (45% Height) -->
+        <div class="quote-section">
+            <div class="gorgeous-box">
+                <!-- Name Display -->
+                <div class="wish-text">Happy Wishes<br><span id="senderNameDisplay" style="color: gold; font-size: 2rem;">From You</span></div>
+                
+                <!-- Quote -->
+                <p class="quote-text">
+                    "Deepawali ka ye pyara tyohar,<br>
+                    Jeevan mein laye khushiyan apaar,<br>
+                    Mata Laxmi viraje aapke dwar,<br>
+                    Shubh kamna hamari karein sweekar!"
+                </p>
 
-        <!-- Input & WhatsApp Button Area -->
-        <div class="input-area">
-            <p style="color: white; margin-bottom: 5px;">👇 अपना नाम लिखें 👇</p>
-            <input type="text" id="nameInput" placeholder="Enter Your Name Here...">
-            <br>
+                <!-- Prompt to Next -->
+                <p class="create-msg">👇 अपना नाम लिखने के लिए नीचे क्लिक करें 👇</p>
+                
+                <!-- Next Button -->
+                <button class="btn-next" onclick="goToPage2()">Next ➡️</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 2: CREATE YOUR OWN ================= -->
+    <div id="page2" class="page">
+        <div class="container-box">
+            <h2 style="color: gold; margin-top:0;">Create Your Wish 🪔</h2>
             
-            <!-- WHATSAPP BUTTON -->
-            <button class="wa-btn" onclick="shareOnWhatsApp()">
-                <!-- SVG Icon for WhatsApp -->
-                <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.9 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
-                Share on WhatsApp
-            </button>
+            <!-- Image Preview Small -->
+            <img src="vil.gif" style="width: 150px; border-radius: 10px; border: 2px solid white; margin-bottom: 15px;">
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <p style="color: white; margin-bottom: 5px;">Enter Your Name:</p>
+                <input type="text" id="nameInput" class="input-field" placeholder="आपका नाम यहाँ...">
+                
+                <!-- WhatsApp Share Button -->
+                <button class="wa-btn" onclick="shareOnWhatsApp()">
+                    <svg width="24" height="24" viewBox="0 0 448 512" style="fill:white;"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.9 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+                    Share on WhatsApp
+                </button>
+            </div>
+
+            <!-- Manual Link Backup -->
+            <div id="manualShare">
+                <input type="text" id="generatedUrl" readonly>
+                <button onclick="copyLink()" style="margin-top:5px;">Copy Link</button>
+            </div>
+
+            <!-- Blog Link -->
+            <a href="https://vilayash2014.blogspot.com/2025/05/happy-buddha-purnima.html" class="blog-btn" target="_blank">See More Images on Blog ➡️</a>
         </div>
-
-        <!-- Manual Share (Hidden Backup) -->
-        <div id="manualShare">
-            <p style="font-size:12px; color:#ccc;">Copy Link:</p>
-            <input type="text" id="generatedUrl" readonly style="width:70%; background:#000; color:#fff; border:1px solid #555;">
-        </div>
-
-        <!-- Extra Link to Blog -->
-        <a href="https://vilayash2014.blogspot.com/2025/05/happy-buddha-purnima.html" class="blog-btn" target="_blank">See More Wishes & Images ➡️</a>
-
     </div>
 
-    <!-- ADSTERRA AD UNIT (BOTTOM) -->
-    <div class="ad-container">
+    <!-- 3. ADS (BOTTOM) -->
+    <div class="ad-container ad-bottom">
         <script type="text/javascript">
-            atOptions = {
-                'key' : '5151d99dda1d9483bde7073716b4e6c7',
-                'format' : 'iframe',
-                'height' : 60,
-                'width' : 468,
-                'params' : {}
-            };
+            atOptions = { 'key' : '5151d99dda1d9483bde7073716b4e6c7', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
         </script>
         <script type="text/javascript" src="//www.highperformanceformat.com/5151d99dda1d9483bde7073716b4e6c7/invoke.js"></script>
     </div>
 
+    <!-- JAVASCRIPT LOGIC -->
     <script>
         // CONFIG
         const images = ['vil.gif', 'vil1.gif', 'vil2.gif', 'vil3.gif', 'vil4.gif'];
         let currentIndex = 0;
 
+        // --- ON LOAD ---
         window.onload = function() {
+            // Check for Name in URL
             const urlParams = new URLSearchParams(window.location.search);
             const senderName = urlParams.get('n');
 
             if (senderName) {
+                // Scenario 1: User came from a link -> Show Page 1
                 const decodedName = decodeURIComponent(senderName);
-                document.getElementById('defaultHeader').style.display = 'none';
-                document.getElementById('wishingText').style.display = 'block';
-                document.getElementById('displayName').innerText = decodedName;
-                document.getElementById('mainImage').src = images[0];
-                
-                // Start HEAVY Fireworks
+                document.getElementById('senderNameDisplay').innerText = decodedName;
+                document.getElementById('page1').classList.add('active'); // Show Page 1
+                startHeavyFireworks(); // Firecrackers
+                createFlowers(); // Flower Rain
+            } else {
+                // Scenario 2: User opened site directly -> Show Page 2 directly (Optional logic)
+                // OR show Page 1 with generic text. Let's show Page 1 as landing.
+                document.getElementById('senderNameDisplay').innerText = "Friends & Family";
+                document.getElementById('page1').classList.add('active');
                 startHeavyFireworks();
+                createFlowers();
             }
         };
 
-        function changeImage() {
-            currentIndex++;
-            if (currentIndex >= images.length) currentIndex = 0;
-            document.getElementById('mainImage').src = images[currentIndex];
+        // --- NAVIGATION ---
+        function goToPage2() {
+            // Hide Page 1, Show Page 2
+            document.getElementById('page1').classList.remove('active');
+            document.getElementById('page2').classList.add('active');
         }
 
+        // --- SHARE LOGIC ---
         function shareOnWhatsApp() {
             const name = document.getElementById('nameInput').value.trim();
-            if (name === "") { alert("Please enter your name first!"); return; }
+            if (name === "") { alert("Please enter your name!"); return; }
 
             const baseUrl = window.location.href.split('?')[0];
             const newUrl = baseUrl + "?n=" + encodeURIComponent(name);
 
-            // Show manual link for backup
+            // Show manual backup
             document.getElementById('manualShare').style.display = 'block';
             document.getElementById('generatedUrl').value = newUrl;
 
-            // WhatsApp Logic
-            const msg = `✨ *Special Surprise for You* ✨\n\n${name} sent you a magical wish! 🎁\nClick the blue link below 👇\n\n${newUrl}`;
-            
-            // Open WhatsApp
+            // WhatsApp Message
+            const msg = `✨ *Happy Diwali Surprise* ✨\n\n${name} has sent you a magical greeting! 🎁\nClick the blue link to see magic 👇\n\n${newUrl}`;
             window.location.href = "whatsapp://send?text=" + encodeURIComponent(msg);
         }
 
-        // --- HEAVY FIREWORKS LOGIC (Visible on Front) ---
+        function copyLink() {
+            const copyText = document.getElementById("generatedUrl");
+            copyText.select();
+            document.execCommand("copy");
+            alert("Link Copied!");
+        }
+
+        // --- ANIMATION 1: HEAVY FIREWORKS (FRONT) ---
         function startHeavyFireworks() {
             const canvas = document.getElementById("fireworksCanvas");
             const ctx = canvas.getContext("2d");
@@ -315,61 +370,53 @@
 
             function Particle(x, y, color) {
                 this.x = x; this.y = y; this.color = color;
-                // Faster velocity
                 this.velocity = { x: (Math.random() - 0.5) * 12, y: (Math.random() - 0.5) * 12 };
-                this.alpha = 1; 
-                this.friction = 0.96;
+                this.alpha = 1; this.friction = 0.96;
             }
-
             Particle.prototype.draw = function() {
                 ctx.globalAlpha = this.alpha;
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, 2.5, 0, Math.PI * 2, false); // Bigger particles
+                ctx.arc(this.x, this.y, 2.5, 0, Math.PI * 2, false);
                 ctx.fillStyle = this.color;
                 ctx.fill();
             }
-
             Particle.prototype.update = function() {
                 this.velocity.x *= this.friction;
                 this.velocity.y *= this.friction;
                 this.x += this.velocity.x;
-                this.y += this.velocity.y + 0.1; // Gravity
-                this.alpha -= 0.015; // Fade out
+                this.y += this.velocity.y + 0.1; 
+                this.alpha -= 0.015;
                 this.draw();
             }
-
             function createExplosion(x, y) {
                 const colors = ['#ff0000', '#ffd700', '#00ff00', '#00ffff', '#ff00ff', '#ffffff'];
-                // Heavy explosion
-                for (let i = 0; i < 100; i++) {
-                    particles.push(new Particle(x, y, colors[Math.floor(Math.random() * colors.length)]));
-                }
+                for (let i = 0; i < 100; i++) particles.push(new Particle(x, y, colors[Math.floor(Math.random() * colors.length)]));
             }
-
             function animate() {
                 requestAnimationFrame(animate);
-                
-                // IMPORTANT: This technique fades trails to TRANSPARENT, not Black.
-                // This ensures the website background remains visible underneath.
-                ctx.globalCompositeOperation = 'destination-out';
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; 
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                ctx.globalCompositeOperation = 'source-over';
-
-                particles.forEach((p, i) => {
-                    if (p.alpha > 0) p.update();
-                    else particles.splice(i, 1);
-                });
-
-                // Frequent explosions
-                if (Math.random() < 0.15) {
-                    createExplosion(Math.random() * canvas.width, Math.random() * canvas.height * 0.6);
-                }
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear completely for Front Layer transparent feel
+                particles.forEach((p, i) => { if (p.alpha > 0) p.update(); else particles.splice(i, 1); });
+                if (Math.random() < 0.15) createExplosion(Math.random() * canvas.width, Math.random() * canvas.height * 0.7);
             }
             animate();
         }
-        
+
+        // --- ANIMATION 2: FALLING FLOWERS ---
+        function createFlowers() {
+            const symbols = ['🌸', '🌺', '🌹', '🌻', '🪔'];
+            setInterval(() => {
+                const flower = document.createElement('div');
+                flower.classList.add('flower');
+                flower.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                flower.style.left = Math.random() * 100 + 'vw';
+                flower.style.animationDuration = Math.random() * 3 + 2 + 's'; // 2-5s duration
+                flower.style.fontSize = Math.random() * 20 + 20 + 'px';
+                document.body.appendChild(flower);
+
+                setTimeout(() => { flower.remove(); }, 5000);
+            }, 300); // New flower every 300ms
+        }
+
         window.addEventListener('resize', () => {
             const c = document.getElementById("fireworksCanvas");
             c.width = window.innerWidth;
@@ -378,3 +425,4 @@
     </script>
 </body>
 </html>
+        
