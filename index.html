@@ -86,11 +86,11 @@
             position: relative;
         }
 
-        /* VIDEO STYLE */
+        /* VIDEO STYLING FOR PAGE 1 */
         #page1 .main-media {
             width: 65%;
             height: 90%; 
-            object-fit: contain; /* Video ko box me fit karega */
+            object-fit: contain; /* Ensures video isn't cut off */
             border: 3px solid #ff0000;
             border-radius: 15px;
             box-shadow: 0 0 20px #00ff00;
@@ -238,7 +238,7 @@
     <!-- ================= PAGE 1: GREETING SHOWCASE ================= -->
     <div id="page1" class="page">
         <div class="image-section">
-            <!-- FIX: VIDEO TAG ADDED HERE (IMG tag removed) -->
+            <!-- REPLACED IMG WITH VIDEO -->
             <video src="images/vil.mp4" class="main-media" id="displayImage" autoplay loop muted playsinline webkit-playsinline></video>
         </div>
 
@@ -268,7 +268,7 @@
         <div class="container-box">
             <h2 style="color: gold; margin-top:0; margin-bottom: 10px;">Create Your Wish 🎄</h2>
             
-            <!-- FIX: PREVIEW VIDEO TAG -->
+            <!-- REPLACED IMG WITH VIDEO -->
             <video src="images/vil.mp4" id="previewImage" autoplay loop muted playsinline webkit-playsinline style="width: 150px; height: 150px; object-fit: contain; border-radius: 10px; border: 2px solid white; background: black;"></video>
 
             <!-- Change Image Button -->
@@ -302,7 +302,7 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // CONFIG - Using MP4 files
+        // CONFIG - MP4 FILES
         const images = [
             'images/vil.mp4', 
             'images/vil1.mp4', 'images/vil2.mp4', 'images/vil3.mp4', 'images/vil4.mp4',
@@ -350,8 +350,10 @@
         function goToPage2() {
             document.getElementById('page1').classList.remove('active');
             document.getElementById('page2').classList.add('active');
-            // Ensure video plays when page 2 opens
-            document.getElementById('previewImage').play();
+            
+            // Ensure preview video plays
+            const previewVid = document.getElementById('previewImage');
+            previewVid.play().catch(error => console.log("Auto-play prevented"));
         }
 
         // --- CHANGE VIDEO FUNCTION ---
@@ -362,7 +364,7 @@
             // Update the preview video on Page 2
             const vid = document.getElementById('previewImage');
             vid.src = images[currentIndex];
-            vid.play(); // Force play
+            vid.play(); 
             
             // Also update Page 1 video so it's ready when shared
             document.getElementById('displayImage').src = images[currentIndex];
