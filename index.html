@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,14 +86,14 @@
             position: relative;
         }
 
-        /* UPDATED: Style for Video instead of Img */
+        /* VIDEO STYLE */
         #page1 .main-media {
             width: 65%;
             height: 90%; 
-            object-fit: contain; /* Ensures video fits */
-            border: 3px solid #ff0000; /* Red Border */
+            object-fit: contain; /* Video ko box me fit karega */
+            border: 3px solid #ff0000;
             border-radius: 15px;
-            box-shadow: 0 0 20px #00ff00; /* Green Glow */
+            box-shadow: 0 0 20px #00ff00;
             background: black;
             z-index: 20;
         }
@@ -172,7 +171,7 @@
         }
 
         .btn-change-img {
-            background: #25D366; /* Green */
+            background: #25D366;
             color: white;
             border: 1px solid white;
             padding: 8px 20px;
@@ -239,20 +238,18 @@
     <!-- ================= PAGE 1: GREETING SHOWCASE ================= -->
     <div id="page1" class="page">
         <div class="image-section">
-            <!-- UPDATED: VIDEO TAG instead of IMG -->
-            <video src="images/vil.mp4" class="main-media" id="displayImage" autoplay loop muted playsinline></video>
+            <!-- FIX: VIDEO TAG ADDED HERE (IMG tag removed) -->
+            <video src="images/vil.mp4" class="main-media" id="displayImage" autoplay loop muted playsinline webkit-playsinline></video>
         </div>
 
         <div class="quote-section">
             <div class="gorgeous-box">
-                <!-- UPDATED TEXT: Merry Christmas + From [Name] -->
                 <div class="wish-text">
                     Merry Christmas<br>
                     <span style="font-size: 1.2rem; color: #ccc;">From</span><br>
                     <span id="senderNameDisplay" style="color: gold; font-size: 2rem;">You</span>
                 </div>
                 
-                <!-- UPDATED QUOTE: Christmas -->
                 <p class="quote-text">
                     "May this Christmas bring you joy,<br>
                     Happiness and love.<br>
@@ -271,8 +268,8 @@
         <div class="container-box">
             <h2 style="color: gold; margin-top:0; margin-bottom: 10px;">Create Your Wish 🎄</h2>
             
-            <!-- Preview VIDEO (Updated path) -->
-            <video src="images/vil.mp4" id="previewImage" autoplay loop muted playsinline style="width: 150px; height: 150px; object-fit: contain; border-radius: 10px; border: 2px solid white; background: black;"></video>
+            <!-- FIX: PREVIEW VIDEO TAG -->
+            <video src="images/vil.mp4" id="previewImage" autoplay loop muted playsinline webkit-playsinline style="width: 150px; height: 150px; object-fit: contain; border-radius: 10px; border: 2px solid white; background: black;"></video>
 
             <!-- Change Image Button -->
             <button class="btn-change-img" onclick="changeImage()">Change Video 🔄</button>
@@ -305,7 +302,7 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // CONFIG - EXTENDED MP4 LIST (vil.mp4 to vil18.mp4)
+        // CONFIG - Using MP4 files
         const images = [
             'images/vil.mp4', 
             'images/vil1.mp4', 'images/vil2.mp4', 'images/vil3.mp4', 'images/vil4.mp4',
@@ -353,6 +350,8 @@
         function goToPage2() {
             document.getElementById('page1').classList.remove('active');
             document.getElementById('page2').classList.add('active');
+            // Ensure video plays when page 2 opens
+            document.getElementById('previewImage').play();
         }
 
         // --- CHANGE VIDEO FUNCTION ---
@@ -361,7 +360,10 @@
             if (currentIndex >= images.length) currentIndex = 0;
             
             // Update the preview video on Page 2
-            document.getElementById('previewImage').src = images[currentIndex];
+            const vid = document.getElementById('previewImage');
+            vid.src = images[currentIndex];
+            vid.play(); // Force play
+            
             // Also update Page 1 video so it's ready when shared
             document.getElementById('displayImage').src = images[currentIndex];
         }
@@ -418,7 +420,7 @@
                 this.draw();
             }
             function createExplosion(x, y) {
-                // Christmas Colors: Red, Green, Gold, White
+                // Christmas Colors
                 const colors = ['#ff0000', '#00ff00', '#ffd700', '#ffffff'];
                 for (let i = 0; i < 100; i++) particles.push(new Particle(x, y, colors[Math.floor(Math.random() * colors.length)]));
             }
