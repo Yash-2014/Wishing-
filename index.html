@@ -55,7 +55,7 @@
             justify-content: center;
         }
         .ad-top { top: 0; }
-        .ad-bottom { bottom: 0; }
+        /* Bottom ad CSS removed/unused */
 
         /* --- PAGE MANAGEMENT --- */
         .page {
@@ -66,7 +66,7 @@
             align-items: center;
             justify-content: center;
             padding-top: 60px;
-            padding-bottom: 70px;
+            padding-bottom: 20px; /* Reduced padding since bottom ad is gone */
             box-sizing: border-box;
             position: absolute;
             top: 0;
@@ -227,7 +227,7 @@
     <!-- 1. HEAVY FIREWORKS -->
     <canvas id="fireworksCanvas"></canvas>
 
-    <!-- 2. TOP AD -->
+    <!-- 2. TOP AD (Kept as requested) -->
     <div class="ad-container ad-top">
         <script type="text/javascript">
             atOptions = { 'key' : '5151d99dda1d9483bde7073716b4e6c7', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
@@ -292,13 +292,7 @@
         </div>
     </div>
 
-    <!-- 3. BOTTOM AD -->
-    <div class="ad-container ad-bottom">
-        <script type="text/javascript">
-            atOptions = { 'key' : '5151d99dda1d9483bde7073716b4e6c7', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
-        </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/5151d99dda1d9483bde7073716b4e6c7/invoke.js"></script>
-    </div>
+    <!-- 3. BOTTOM AD REMOVED HERE -->
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
