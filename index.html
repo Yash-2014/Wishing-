@@ -9,7 +9,7 @@
         body {
             margin: 0;
             padding: 0;
-            background: radial-gradient(circle, #002e00, #000000);
+            background: radial-gradient(circle, #002e00, #000000); /* Dark Green/Black for Christmas */
             font-family: 'Arial', sans-serif;
             color: #fff;
             text-align: center;
@@ -19,6 +19,7 @@
         }
 
         /* --- LAYERS --- */
+        /* Canvas for Particles */
         canvas {
             position: fixed;
             top: 0;
@@ -29,6 +30,7 @@
             pointer-events: none;
         }
 
+        /* CSS Animation Layer */
         #cssEffectLayer {
             position: fixed;
             top: 0;
@@ -39,7 +41,7 @@
             pointer-events: none;
         }
 
-        /* --- BACKGROUND ICONS --- */
+        /* Background Falling Icons */
         .flower {
             position: absolute;
             top: -10%;
@@ -85,7 +87,7 @@
 
         .page.active { display: flex; }
 
-        /* --- PAGE 1: GREETING VIEW --- */
+        /* --- PAGE 1 STYLE --- */
         #page1 .image-section {
             height: 55%;
             width: 100%;
@@ -151,7 +153,7 @@
             animation: pulseText 1s infinite;
         }
 
-        /* --- CONTAINER BOX (P2, P3, P4) --- */
+        /* --- CREATION PAGES CONTAINER --- */
         .container-box {
             width: 90%;
             max-width: 450px;
@@ -163,7 +165,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            max-height: 80vh; /* Limit height */
+            max-height: 85vh;
         }
 
         .input-field {
@@ -178,10 +180,10 @@
             color: #000;
         }
 
-        /* --- GRID LAYOUTS --- */
+        /* --- GRIDS & LISTS --- */
         .scroll-grid {
             width: 95%;
-            flex-grow: 1; /* Take available space */
+            flex-grow: 1;
             overflow-y: auto;
             margin-bottom: 15px;
             padding: 5px;
@@ -189,21 +191,19 @@
             border-radius: 10px;
         }
 
-        /* Effects Grid */
         .effects-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
         }
 
-        /* Quotes List */
         .quotes-list {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
 
-        /* Cards */
+        /* Card Styles */
         .card-item {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid #00ff00;
@@ -212,6 +212,10 @@
             cursor: pointer;
             transition: all 0.2s;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .card-item.selected {
@@ -221,16 +225,17 @@
         }
 
         .quote-card {
-            font-size: 14px;
+            font-size: 13px;
             font-style: italic;
             color: #ddd;
             text-align: left;
+            display: block;
         }
 
         .effect-icon { font-size: 24px; margin-bottom: 5px; }
         .effect-name { font-size: 12px; font-weight: bold; }
 
-        /* --- BUTTONS ROW --- */
+        /* --- BUTTONS --- */
         .btn-row {
             display: flex;
             gap: 10px;
@@ -243,19 +248,20 @@
             background: linear-gradient(to right, #ff0000, #cc0000);
             color: white;
             border: 2px solid white;
-            padding: 10px 20px;
+            padding: 12px 20px;
             font-size: 16px;
             font-weight: bold;
             border-radius: 30px;
             cursor: pointer;
             flex: 1;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
         
         .btn-back {
-            background: #555;
+            background: #444;
             color: white;
-            border: 2px solid #ccc;
-            padding: 10px 20px;
+            border: 2px solid #999;
+            padding: 12px 20px;
             font-size: 16px;
             font-weight: bold;
             border-radius: 30px;
@@ -269,6 +275,8 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            width: 100%;
+            animation: pulseBtn 2s infinite;
         }
 
         .btn-change-img {
@@ -284,7 +292,7 @@
         }
         .btn-change-img:active { transform: scale(0.95); }
 
-        /* --- CSS EFFECT CLASSES --- */
+        /* --- CSS EFFECTS --- */
         .fx-rays { background: repeating-conic-gradient(#000 0 15deg, rgba(255,215,0,0.2) 15deg 30deg); animation: spin 20s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
         .fx-glow { box-shadow: inset 0 0 50px gold; animation: pulseGlow 2s infinite; }
@@ -297,6 +305,7 @@
 
         @keyframes glow { from {box-shadow: 0 0 10px #ff0000;} to {box-shadow: 0 0 25px #00ff00;} }
         @keyframes pulseText { 0% {opacity: 0.6;} 50% {opacity: 1;} 100% {opacity: 0.6;} }
+        @keyframes pulseBtn { 0% {transform: scale(1);} 50% {transform: scale(1.02);} 100% {transform: scale(1);} }
 
         #manualShare { display: none; margin-top: 10px; width: 100%; text-align: center;}
         #generatedUrl { width: 90%; background: #222; color: #fff; border: 1px solid #555; font-size: 10px; padding: 5px; }
@@ -304,11 +313,11 @@
 </head>
 <body>
 
-    <!-- 1. EFFECT LAYERS -->
+    <!-- 1. VISUAL LAYERS -->
     <div id="cssEffectLayer"></div>
     <canvas id="fireworksCanvas"></canvas>
 
-    <!-- 2. TOP AD -->
+    <!-- 2. TOP AD (Adsterra) -->
     <div class="ad-container ad-top">
         <script type="text/javascript">
             atOptions = { 'key' : '5151d99dda1d9483bde7073716b4e6c7', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
@@ -316,7 +325,7 @@
         <script type="text/javascript" src="//www.highperformanceformat.com/5151d99dda1d9483bde7073716b4e6c7/invoke.js"></script>
     </div>
 
-    <!-- ================= PAGE 1: GREETING SHOWCASE ================= -->
+    <!-- ================= PAGE 1: GREETING VIEW ================= -->
     <div id="page1" class="page">
         <div class="image-section">
             <video src="images/vil.mp4" class="main-media" id="displayImage" autoplay loop muted playsinline webkit-playsinline></video>
@@ -330,12 +339,11 @@
                     <span id="senderNameDisplay" style="color: gold; font-size: 2rem;">You</span>
                 </div>
                 
-                <!-- This text will be replaced if a quote is selected -->
                 <p class="quote-text" id="mainQuoteText">
                     "May this Christmas bring you joy, Happiness and love. Wishing you and your family A very Merry Christmas!"
                 </p>
 
-                <p class="create-msg">👇 “Click below to write your name” 👇</p>
+                <p class="create-msg">👇 अपना नाम लिखने के लिए नीचे क्लिक करें 👇</p>
                 <button class="btn-next" onclick="goToPage(2)">Next ➡️</button>
             </div>
         </div>
@@ -351,7 +359,7 @@
             <button class="btn-change-img" onclick="changeImage()">Change Video 🔄</button>
 
             <p style="color: white; margin-bottom: 5px; margin-top: 5px;">Enter Your Name:</p>
-            <input type="text" id="nameInput" class="input-field" placeholder="PUT UR NAME HERE...">
+            <input type="text" id="nameInput" class="input-field" placeholder="आपका नाम यहाँ...">
             
             <div class="btn-row">
                 <button class="btn-back" onclick="goToPage(1)">⬅️ Back</button>
@@ -368,7 +376,7 @@
             
             <div class="scroll-grid">
                 <div class="effects-grid" id="effectsGrid">
-                    <!-- Effects generated by JS -->
+                    <!-- JS will fill this -->
                 </div>
             </div>
 
@@ -383,11 +391,11 @@
     <div id="page4" class="page">
         <div class="container-box">
             <h2 style="color: gold; margin: 10px 0;">Step 3: Quote 📝</h2>
-            <p style="font-size: 12px; margin-bottom: 5px;">Select a wish:</p>
+            <p style="font-size: 12px; margin-bottom: 5px;">Select a wish & Share:</p>
             
             <div class="scroll-grid">
                 <div class="quotes-list" id="quotesList">
-                    <!-- Quotes generated by JS -->
+                    <!-- JS will fill this -->
                 </div>
             </div>
 
@@ -409,7 +417,7 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // --- 1. CONFIG & DATA ---
+        // --- 1. DATASETS ---
         const images = [
             'images/vil.mp4', 'images/vil1.mp4', 'images/vil2.mp4', 'images/vil3.mp4', 
             'images/vil4.mp4', 'images/vil5.mp4', 'images/vil6.mp4', 'images/vil7.mp4', 
@@ -464,11 +472,12 @@
             { id: 20, text: "As Christmas arrives, may your life be filled with light, peace, and beautiful new beginnings." }
         ];
         
+        // --- 2. STATE ---
         let currentIndex = 0; 
         let currentEffectId = 0; 
-        let currentQuoteId = 1; // Default Quote ID
+        let currentQuoteId = 1; 
 
-        // --- 2. ON LOAD ---
+        // --- 3. INIT ---
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const senderName = urlParams.get('n');
@@ -476,27 +485,16 @@
             const effIndex = urlParams.get('e');
             const qIndex = urlParams.get('q');
 
+            // Restore State
             if (imgIndex !== null) currentIndex = parseInt(imgIndex) % images.length;
             if (effIndex !== null) currentEffectId = parseInt(effIndex);
-            
-            // Set Quote
-            if (qIndex !== null) {
-                currentQuoteId = parseInt(qIndex);
-                const qObj = quotesData.find(q => q.id === currentQuoteId);
-                if(qObj) document.getElementById('mainQuoteText').innerText = `"${qObj.text}"`;
-            }
+            if (qIndex !== null) currentQuoteId = parseInt(qIndex);
 
-            // Init Media
+            // Update Media
             document.getElementById('displayImage').src = images[currentIndex];
             document.getElementById('previewImage').src = images[currentIndex];
 
-            // Render Grids
-            renderEffectButtons();
-            renderQuoteButtons();
-
-            // Apply Effect
-            applyEffectLogic(currentEffectId);
-
+            // Update Text
             if (senderName) {
                 document.getElementById('senderNameDisplay').innerText = decodeURIComponent(senderName);
                 document.getElementById('page1').classList.add('active'); 
@@ -504,27 +502,39 @@
                 document.getElementById('senderNameDisplay').innerText = "Friends & Family";
                 document.getElementById('page1').classList.add('active');
             }
+
+            // Update Quote
+            const qObj = quotesData.find(q => q.id === currentQuoteId);
+            if(qObj) document.getElementById('mainQuoteText').innerText = `"${qObj.text}"`;
+
+            // Render Grids
+            renderEffectButtons();
+            renderQuoteButtons();
+
+            // Apply Effect
+            applyEffectLogic(currentEffectId);
             
+            // BG Icons
             createChristmasIcons();
         };
 
-        // --- 3. NAVIGATION SYSTEM ---
+        // --- 4. NAVIGATION ---
         function goToPage(pageNum) {
-            // Validation for moving from P2 to P3
+            // AD TRIGGER: Whenever navigating
+            try { Android.showAd(); } catch(e) {} 
+
+            // Validation
             if(pageNum === 3) {
                 const name = document.getElementById('nameInput').value.trim();
                 if (name === "") { alert("Please enter your name first!"); return; }
             }
 
-            // Hide all pages
+            // Switch
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            // Show target page
             document.getElementById('page' + pageNum).classList.add('active');
 
-            // Autoplay video on create pages
-            if(pageNum === 2) {
-                document.getElementById('previewImage').play().catch(e=>console.log(e));
-            }
+            // Video
+            if(pageNum === 2) document.getElementById('previewImage').play().catch(e=>{});
         }
 
         function changeImage() {
@@ -534,7 +544,7 @@
             document.getElementById('displayImage').src = images[currentIndex];
         }
 
-        // --- 4. RENDER LISTS ---
+        // --- 5. RENDERERS ---
         function renderEffectButtons() {
             const grid = document.getElementById('effectsGrid');
             grid.innerHTML = '';
@@ -561,28 +571,27 @@
             });
         }
 
-        // --- 5. SELECTION LOGIC ---
+        // --- 6. SELECTIONS ---
         function selectEffect(id) {
             currentEffectId = id;
             document.querySelectorAll('#effectsGrid .card-item').forEach(c => c.classList.remove('selected'));
-            renderEffectButtons(); // Re-render to show selected state
+            renderEffectButtons(); 
             applyEffectLogic(id);
         }
 
         function selectQuote(id) {
             currentQuoteId = id;
             document.querySelectorAll('#quotesList .card-item').forEach(c => c.classList.remove('selected'));
-            renderQuoteButtons(); // Re-render
+            renderQuoteButtons(); 
             
-            // Preview it on Page 1 (for consistency)
+            // Update Page 1 preview for sender to see
             const qObj = quotesData.find(q => q.id === id);
             if(qObj) document.getElementById('mainQuoteText').innerText = `"${qObj.text}"`;
         }
 
         function applyEffectLogic(id) {
             const cssLayer = document.getElementById('cssEffectLayer');
-            cssLayer.className = ''; 
-            cssLayer.innerHTML = ''; 
+            cssLayer.className = ''; cssLayer.innerHTML = ''; 
             
             if (id === 0) { startCanvasAnimation('fireworks'); return; }
 
@@ -597,7 +606,7 @@
             }
         }
 
-        // --- 6. CANVAS ENGINE ---
+        // --- 7. CANVAS ENGINE ---
         let animationFrameId;
         function startCanvasAnimation(type) {
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
@@ -612,8 +621,7 @@
                 this.size = size;
                 this.vx = (Math.random() - 0.5) * speed;
                 this.vy = (Math.random() - 0.5) * speed;
-                this.alpha = 1;
-                this.behavior = behavior;
+                this.alpha = 1; this.behavior = behavior;
             }
             Particle.prototype.update = function() {
                 if(this.behavior === 'gravity') this.vy += 0.1;
@@ -655,11 +663,13 @@
             else ctx.clearRect(0,0,canvas.width,canvas.height);
         }
 
-        // --- 7. SHARE LOGIC ---
+        // --- 8. SHARE LOGIC ---
         function shareOnWhatsApp() {
+            // AD TRIGGER
+            try { Android.showAd(); } catch(e) {}
+
             const name = document.getElementById('nameInput').value.trim();
             const baseUrl = window.location.href.split('?')[0];
-            // ADDED: &q= for quote ID
             const newUrl = baseUrl + "?n=" + encodeURIComponent(name) + "&i=" + currentIndex + "&e=" + currentEffectId + "&q=" + currentQuoteId;
 
             document.getElementById('manualShare').style.display = 'block';
