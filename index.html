@@ -60,7 +60,7 @@
 
         /* --- ADS --- */
         .ad-container {
-            position: auto;
+            position: fixed;
             left: 0;
             right: 0;
             z-index: 1000;
@@ -68,7 +68,7 @@
             display: flex;
             justify-content: center;
         }
-        .ad-buttom { buttom: 0; }
+        .ad-top { top: 0; }
 
         /* --- PAGE MANAGEMENT --- */
         .page {
@@ -319,7 +319,13 @@
     <div id="cssEffectLayer"></div>
     <canvas id="fireworksCanvas"></canvas>
 
-
+<!-- 2. TOP AD (Adsterra) -->
+    <div class="ad-container ad-top">
+        <script type="text/javascript">
+            atOptions = { 'key' : '5151d99dda1d9483bde7073716b4e6c7', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/5151d99dda1d9483bde7073716b4e6c7/invoke.js"></script>
+    </div>
 
     
 
@@ -699,13 +705,7 @@
             }, 500);
         }
     
-<!-- 2. TOP AD (Adsterra) -->
-    <div class="ad-container ad-buttom">
-        <script type="text/javascript">
-            atOptions = { 'key' : '5151d99dda1d9483bde7073716b4e6c7', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
-        </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/5151d99dda1d9483bde7073716b4e6c7/invoke.js"></script>
-    </div>
+
 
     </script>
 <script src="https://pl27535509.effectivegatecpm.com/e9/c6/b5/e9c6b581542b2d0e18a96a7e9c0e9105.js"></script>
